@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>195 Días — Celebración</title>
+<style>
+  :root{--bg:#0f1724;--card:#0f2233;--accent:#ff6b6b}
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#071226,#081426);font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;color:#fff}
+  .card{width:92%;max-width:720px;background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(0,0,0,0.06));border-radius:18px;padding:22px;box-shadow:0 10px 30px rgba(2,6,23,0.6);text-align:center}
+  .heart{font-size:78px;line-height:1;margin:6px}
+  h1{font-size:26px;margin:6px}
+  p{opacity:.9;margin:6px 0 18px}
+  .btn{display:inline-flex;gap:10px;align-items:center;padding:12px 18px;border-radius:12px;border:0;background:linear-gradient(90deg,var(--accent),#ff8b8b);color:#120a0a;font-weight:700;cursor:pointer}
+  .btn:active{transform:translateY(1px)}
+  .cover{width:240px;height:240px;margin:12px auto;border-radius:12px;overflow:hidden;display:block;box-shadow:0 12px 30px rgba(0,0,0,0.5)}
+  .cover img{width:100%;height:100%;object-fit:cover;display:block}
+  .playing .cover{animation:float 3s ease-in-out infinite}
+  @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)}}
+  .small{font-size:13px;opacity:.85;margin-top:10px}
+  footer{font-size:12px;opacity:.7;margin-top:16px}
+  /* Responsive */
+  @media (max-width:420px){.heart{font-size:56px}.cover{width:200px;height:200px}}
+</style>
+</head>
+<body>
+  <div class="card" id="card">
+    <div class="heart">💖</div>
+    <h1>Celebrando <strong>195 días</strong> junto a mi amor</h1>
+    <p>Hoy quiero recordarte lo especial que eres para mí. Gracias por cada risa, abrazo y momento. Te amo.</p>
+
+    <div class="cover" id="cover" title="Toca reproducir para escuchar la canción">
+      <!-- Imagen de portada; puedes reemplazar cover.jpg por otra imagen -->
+      <img src="cover.jpg" alt="Portada romántica">
+    </div>
+
+    <button class="btn" id="playBtn">▶️ Reproducir "Can't Help Falling in Love" — Elvis Presley</button>
+    <div class="small">Si el audio no suena en tu móvil, toca el botón nuevamente o dale permiso de reproducción.</div>
+
+    <footer>Compartir este enlace con tu pareja para sorprenderla 💌</footer>
+  </div>
+
+  <!-- YouTube IFrame API: videoId oficial de Elvis -->
+  <div id="player-container" style="display:none"></div>
+  <script>
+    // Video ID oficial encontrado en YouTube: vGJTaP6anOU
+    const VIDEO_ID = 'vGJTaP6anOU';
+    let player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player-container', {
+        height: '0',
+        width: '0',
+        videoId: VIDEO_ID,
+        playerVars: { 'playsinline': 1, 'rel': 0 },
+        events: {
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+    function onPlayerStateChange(e){
+      const card = document.getElementById('card');
+      if(e.data === YT.PlayerState.PLAYING){
+        card.classList.add('playing');
+      } else {
+        card.classList.remove('playing');
+      }
+    }
+
+    // Cargar la API de YouTube dinámicamente
+    (function loadYT(){
+      const tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(tag);
+    })();
+
+    // Botón de reproducción
+    document.getElementById('playBtn').addEventListener('click', function(){
+      // reproducir o pausar según estado
+      if(window.YT && player){
+        const state = player.getPlayerState();
+        if(state === YT.PlayerState.PLAYING){
+          player.pauseVideo();
+        } else {
+          // Intentamos reproducir: en la mayoría de móviles necesita interacción (ya fue un click)
+          player.playVideo();
+          // además hacemos focus en el cover para animar
+          document.getElementById('card').classList.add('playing');
+        }
+      } else {
+        // Si la API aún no está lista, informamos al usuario y repetimos la acción cuando esté lista.
+        this.textContent = 'Cargando... (toca otra vez)';
+      }
+    });
+
+    // Si quieres que el click sobre la imagen también reproduzca:
+    document.getElementById('cover').addEventListener('click', function(){
+      document.getElementById('playBtn').click();
+    });
+  </script>
+</body>
+</html>
