@@ -2,79 +2,66 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>195 días juntos 💕</title>
+  <title>195 días contigo 💖</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
-      background-size: 400% 400%;
-      animation: gradient 12s ease infinite;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      text-align: center;
-      color: #fff;
-    }
-    @keyframes gradient {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
-    .card {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-      backdrop-filter: blur(8px);
-      max-width: 500px;
-      animation: fadeIn 2s ease;
-    }
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
+      flex-direction: column;
+      margin: 0;
     }
     h1 {
-      font-size: 2em;
-      margin-bottom: 15px;
+      font-size: 2.5em;
+      color: #fff;
+      margin-bottom: 10px;
     }
     p {
       font-size: 1.2em;
-      line-height: 1.6;
+      color: #fff;
+      margin-bottom: 30px;
     }
-    .heart {
-      font-size: 2.5em;
-      animation: heartbeat 1.5s infinite;
+    button {
+      background: #ff4b5c;
+      border: none;
+      color: white;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
     }
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-    }
-    .photo {
-      width: 100%;
-      border-radius: 15px;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    button:hover {
+      background: #ff1e3c;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <img src="foto.jpg" alt="Nosotros" class="photo">
-    <div class="heart">❤️</div>
-    <h1>195 días juntos, mi amor 💕</h1>
-    <p>
-      Hoy celebramos este tiempo maravilloso a tu lado 🌸✨  
-      Gracias por hacer cada día especial 💌  
-      Eres mi alegría y mi razón de sonreír 😘
-    </p>
-  </div>
+  <h1>💘 Hoy celebramos 195 días juntos 💘</h1>
+  <p>Para ti, mi amor, con nuestra canción favorita 🎶</p>
 
-  <audio autoplay loop>
-    <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Elvis_Presley/Elvis_Greatest_Hits/Elvis_Presley_-_Cant_Help_Falling_in_Love.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio.
-  </audio>
+  <!-- Música desde Internet Archive -->
+  <audio id="musica" src="https://archive.org/download/ElvisPresleyCantHelpFallingInLove_201902/ElvisPresleyCantHelpFallingInLove_201902.mp3" preload="none"></audio>
+  
+  <button id="playBtn">▶ Reproducir canción</button>
+
+  <script>
+    const musica = document.getElementById("musica");
+    const playBtn = document.getElementById("playBtn");
+
+    playBtn.addEventListener("click", () => {
+      if (musica.paused) {
+        musica.play();
+        playBtn.textContent = "⏸ Pausar canción";
+      } else {
+        musica.pause();
+        playBtn.textContent = "▶ Reproducir canción";
+      }
+    });
+  </script>
 </body>
 </html>
