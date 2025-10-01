@@ -52,20 +52,6 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.3); }
     }
-    .music-btn {
-      margin-top: 20px;
-      background: #ff4d6d;
-      border: none;
-      padding: 10px 20px;
-      color: white;
-      font-size: 1em;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .music-btn:hover {
-      background: #e63e5e;
-    }
     .photo {
       width: 100%;
       border-radius: 15px;
@@ -84,23 +70,11 @@
       Gracias por hacer cada día especial 💌  
       Eres mi alegría y mi razón de sonreír 😘
     </p>
-    <button class="music-btn" onclick="toggleMusic()">🎶 Reproducir / Pausar</button>
   </div>
 
-  <audio id="song" loop>
+  <audio autoplay loop>
     <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Elvis_Presley/Elvis_Greatest_Hits/Elvis_Presley_-_Cant_Help_Falling_in_Love.mp3" type="audio/mpeg">
     Tu navegador no soporta audio.
   </audio>
-
-  <script>
-    const song = document.getElementById("song");
-    function toggleMusic() {
-      if (song.paused) {
-        song.play();
-      } else {
-        song.pause();
-      }
-    }
-  </script>
 </body>
 </html>
